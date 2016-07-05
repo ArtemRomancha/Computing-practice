@@ -51,7 +51,7 @@ def Register():
 			print("Пароль должен содержать более 5 символов")
 		password = getpass.getpass("Придумайте пароль\n")
 	
-	date = input("Напишите свою дату рождения в формате YYYY-MM-DD\n")
+	date = input("Напишите свою дату рождения в формате DD-MM-YYYY\n")
 	while 1:
 		if len(date) == 10:
 			break
