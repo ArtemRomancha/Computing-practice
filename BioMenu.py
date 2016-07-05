@@ -8,6 +8,7 @@ def AskBiorhythms(login):
 		try:
 			DataSet = Bio.CalculateBiorhythms(user[0], user[3], int(duration))
 			DBAccess.WriteData(DataSet)
+			print("Прогноз составлен")
 			break
 		except:
 			print("Неверная продолжительность. Попробуйте снова")
