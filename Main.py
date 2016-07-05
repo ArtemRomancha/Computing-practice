@@ -1,4 +1,5 @@
 import Entry
+import BioMenu
 
 reg = Entry.AskIsRegistered()
 
@@ -7,4 +8,6 @@ if reg:
 else: 
 	user = Entry.Register()
 
-print("Welcome, %s" % user)
+print("Welcome, %s\n" % user)
+
+BioMenu.AskBiorhythms(user)
