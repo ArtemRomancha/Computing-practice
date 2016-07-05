@@ -33,9 +33,17 @@ def AddUser(login, password, birthdate):
 	connector.commit()
 	connector.close()
 	
-def WriteData(array):
+def WriteData(DataSet):
 	connector = sql.connect('BioDataBase.db')
 	cursor = connector.cursor()
-	cursor.executemany("INSERT INTO data VALUES(?, ?, ?, ?, ?)", array)
+	cursor.executemany("INSERT INTO data VALUES(?, ?, ?, ?, ?)", DataSet)
 	connector.commit()
 	connector.close()
+	
+def GetDateOfBirth(login):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.execute("SELECT * FROM users WHERE login = ?", (login, ))
+	row = cursor.fetchone()
+	connector.close()
+	return row
