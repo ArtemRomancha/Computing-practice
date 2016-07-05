@@ -4,17 +4,17 @@ import getpass
 
 def AskLoginPass():
 	while 1:
-		login = input("Vvedite login\n")
-		password = getpass.getpass("Enter password\n")
+		login = input("Введите логин\n")
+		password = getpass.getpass("Введите пароль\n")
 		#login = 'Admin'
 		#password = 'Admin'
 		if DBAccess.Control(login, password):
 			return login			
 		else:
-			print("Invalid login or password")			
+			print("Неверный логин или пароль")			
 			
 def AskIsRegistered():
-	result = input("Have you registered? (Y/N)\n")
+	result = input("Вы зарегистрированы? (Y/N)\n")
 	while 1: 		
 		res = result.lower()
 		if res == 'y':
@@ -25,38 +25,38 @@ def AskIsRegistered():
 			print("Goodbay")
 			sys.exit(1)
 		else:
-			print("Invalid answer")
+			print("Попробуйте еще раз")
 			result = input()
 		
 def Register():
-	login = input("Choose login\n")
+	login = input("Выберите логин\n")
 	while 1:
 		if DBAccess.FreeLogin(login):
 			break
 		else:
-			print("Login isn't free. Choose another one")
+			print("Такой логин уже занят. Придумайте другой")
 			login = input()
 	
-	password = getpass.getpass("Choose the password\n")
+	password = getpass.getpass("Придумайте пароль\n")
 	while 1:		
-		if len(password) > 2:
-			password1 = getpass.getpass("Confirm the password\n")
+		if len(password) > 5:
+			password1 = getpass.getpass("Подтверите пароль\n")
 			if password == password1:
 				break
 			else:
-				print("Passwords not coincide")
+				print("Пароли не совпадают")
 				password = None
 				password1 = None
 		else:
-			print("Password must have more symbols")
-		password = getpass.getpass("Choose the password\n")
+			print("Пароль должен содержать более 5 символов")
+		password = getpass.getpass("Придумайте пароль\n")
 	
-	date = input("Write you date of birth (YYYY-MM-DD)\n")
+	date = input("Напишите свою дату рождения в формате YYYY-MM-DD\n")
 	while 1:
 		if len(date) == 10:
 			break
 		else:
-			date = input("Invalid date! Please try again\n")
+			date = input("IНеверная дата! Попробуйте еще раз\n")
 	DBAccess.AddUser(login, password, date)
 	return login
 		
