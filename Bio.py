@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import math
 
 def CalculateBiorhythms(userId, date, duration):
-	date = datetime.strptime(date, '%Y-%m-%d')
+	date = datetime.strptime(date, '%d-%m-%Y')
 	today = datetime.today()
 	delta = today - date
 	delta = delta.days
@@ -13,10 +13,10 @@ def CalculateBiorhythms(userId, date, duration):
 	
 	for i in range(0, duration):
 		temp = 2 * math.pi * delta 
-		phisical = math.sin(temp / 23) * 100
-		emotional = math.sin(temp / 28) * 100
-		intellectual = math.sin(temp / 33) * 100
-		DataSet.append([userId, str(today + d), phisical, emotional, intellectual])
+		phisical = round(math.sin(temp / 23) * 100, 4)
+		emotional = round(math.sin(temp / 28) * 100, 4)
+		intellectual = round(math.sin(temp / 33) * 100, 4)
+		DataSet.append([userId, (today + d).strftime('%d-%m-%Y'), phisical, emotional, intellectual])
 		d += timedelta(days = 1)
 		delta += 1
 	return DataSet
