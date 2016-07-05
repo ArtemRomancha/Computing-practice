@@ -25,3 +25,10 @@ def FreeLogin(login):
 		return True
 	else:
 		return False
+		
+def AddUser(login, password, birthdate):
+	connector = sql.connect('BioDataBase.db')	
+	cursor = connector.cursor()
+	cursor.execute("INSERT INTO users (login, password, date_of_birth) VALUES (?, ?, ?)", (login, password, birthdate))
+	connector.commit()
+	connector.close()
