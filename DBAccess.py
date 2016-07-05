@@ -15,3 +15,13 @@ def Control(login, password):
 		return True
 	else: 
 		return False
+		
+def FreeLogin(login):
+	cursor = ConnectDB()
+	cursor.execute("SELECT * FROM users WHERE login = ? ", (login, ))
+	connector.close()
+	
+	if cursor.fetchone() == None:
+		return True
+	else:
+		return False
