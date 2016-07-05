@@ -5,13 +5,13 @@ import getpass
 def AskLoginPass():
 	while 1:
 		login = input("Vvedite login\n")
-		password = input("Vvedite password\n")
+		password = getpass.getpass("Enter password\n")
 		#login = 'Admin'
 		#password = 'Admin'
 		if DBAccess.Control(login, password):
-			return True			
+			return login			
 		else:
-			return False			
+			print("Invalid login or password")			
 			
 def AskIsRegistered():
 	result = input("Have you registered? (Y/N)\n")
@@ -29,7 +29,7 @@ def AskIsRegistered():
 			result = input()
 		
 def Register():
-	login = input("Viberete login\n")
+	login = input("Choose login\n")
 	while 1:
 		if DBAccess.FreeLogin(login):
 			break
@@ -56,7 +56,7 @@ def Register():
 		if len(date) == 10:
 			break
 		else:
-			date = input("Invalid date! Please write one more time\n")
-	
+			date = input("Invalid date! Please try again\n")
+	DBAccess.AddUser(login, password, date)
+	return login
 		
-Register()
