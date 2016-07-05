@@ -32,3 +32,10 @@ def AddUser(login, password, birthdate):
 	cursor.execute("INSERT INTO users (login, password, date_of_birth) VALUES (?, ?, ?)", (login, password, birthdate))
 	connector.commit()
 	connector.close()
+	
+def WriteData(array):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.executemany("INSERT INTO data VALUES(?, ?, ?, ?, ?)", array)
+	connector.commit()
+	connector.close()
