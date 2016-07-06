@@ -2,8 +2,7 @@ import Bio
 import DBAccess
 from datetime import datetime, timedelta
 
-def AskBiorhythms(login):
-	user = DBAccess.GetDateOfBirth(login)
+def AskBiorhythms(user):	
 	while 1:
 		duration = input("Введите количество дней для прогноза\n")
 		try:
@@ -15,3 +14,20 @@ def AskBiorhythms(login):
 			break
 		except:
 			print("Неверная продолжительность. Попробуйте снова")
+
+def AskIsRecoverResults(user):
+	if DBAccess.HaveResults(user[0]):
+		result = input("Хотите восстановить предыдущий результат? (Y/N)\n")
+		while 1: 		
+			result = result.lower()
+			if result == 'y':
+				return True
+			elif result == 'n':
+				return False
+			else:
+				print("Попробуйте еще раз")
+				result = input()			
+	else:
+		return False
+		
+
