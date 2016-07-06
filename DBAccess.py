@@ -29,14 +29,23 @@ def FreeLogin(login):
 def AddUser(login, password, birthdate):
 	connector = sql.connect('BioDataBase.db')	
 	cursor = connector.cursor()
-	cursor.execute("INSERT INTO users (login, password, date_of_birth) VALUES (?, ?, ?)", (login, password, birthdate))
+	cursor.execute("INSERT INTO users (login, password, date_of_birth) VALUES (?, ?, ?)", (login, password, birthdate))	
 	connector.commit()
 	connector.close()
+	
+def AddRequest(userId, date, duration):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.execute("INSERT INTO request (user_id, date, duration) VALUES (?, ?, ?)", (userId, date, duration))
+	requestID = cursor.lastrowid
+	connector.commit()
+	connector.close()
+	return requestID
 	
 def WriteData(DataSet):
 	connector = sql.connect('BioDataBase.db')
 	cursor = connector.cursor()
-	cursor.executemany("INSERT INTO data VALUES(?, ?, ?, ?, ?)", DataSet)
+	cursor.executemany("INSERT INTO data VALUES(?, ?, ?, ?, ?, ?)", DataSet)	
 	connector.commit()
 	connector.close()
 	
