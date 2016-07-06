@@ -56,3 +56,15 @@ def GetDateOfBirth(login):
 	row = cursor.fetchone()
 	connector.close()
 	return row
+	
+def HaveResults(user_id):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.execute("SELECT * FROM request WHERE user_id = ?", (user_id, ))
+	row = cursor.fetchone()
+	connector.close()
+		
+	if row != None:
+		return True
+	else: 
+		return False
