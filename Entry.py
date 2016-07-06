@@ -39,7 +39,7 @@ def Register():
 	
 	password = getpass.getpass("Придумайте пароль\n")
 	while 1:		
-		if len(password) > 5:
+		if len(password) >= 5:
 			password1 = getpass.getpass("Подтверите пароль\n")
 			if password == password1:
 				break
