@@ -40,7 +40,11 @@ def AskRecoverVersion(user):
 		print("%i) %10s - %10s" % (i+1, date.strftime('%d-%m-%Y'), (date + d).strftime('%d-%m-%Y')))
 	
 	while 1:
-		answer = int(input())
+		try:
+			answer = int(input())
+		except:
+			print("Неверный индекс")
+			continue
 		if answer - 1 < len(versions):
 			return versions[answer - 1]
 		else:
@@ -64,6 +68,18 @@ def RecoverVersion(request):
 		
 	#Тут вызывать построение графика
 
+def AskBuildNew():
+	result = input("Хотите построить новый прогноз? (Y/N)\n")
+	while 1: 		
+		result = result.lower()
+		if result == 'y':
+			return True
+		elif result == 'n':
+			return False
+		else:
+			print("Попробуйте еще раз")
+			result = input()			
+	
 		
 		
 		
