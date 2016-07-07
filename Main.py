@@ -12,9 +12,10 @@ else:
 print("Welcome, %s\n" % user) #
 
 userData = DBAccess.GetDateOfBirth(user) #
-recover = BioMenu.AskIsRecoverResults(userData)
+recover = BioMenu.AskIsRecoverResults(userData[0])
 
 if recover:
-	print("Recover data")
+	res = BioMenu.AskRecoverVersion(userData[0])
+	BioMenu.RecoverVersion(res)
 else:
 	BioMenu.AskBiorhythms(userData) #
