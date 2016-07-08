@@ -1,5 +1,6 @@
 import Bio
 import DBAccess
+import Graph
 from datetime import datetime, timedelta
 
 def AskBiorhythms(user):	
@@ -10,7 +11,7 @@ def AskBiorhythms(user):
 			requestID = DBAccess.AddRequest(user[0], (datetime.today()).strftime('%d-%m-%Y'), duration)
 			DataSet = Bio.CalculateBiorhythms(user[0], user[3], duration, requestID)
 			DBAccess.WriteData(DataSet)
-			#Тут вызывай свой метод DataSet - кортеж кортежей, duration интовское значение длительности
+			Graph.CreateGraph(DataSet,duration)#Тут вызывай свой метод DataSet - кортеж кортежей, duration интовское значение длительности
 			print("Прогноз составлен")
 			break
 		except:
