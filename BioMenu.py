@@ -67,7 +67,7 @@ def RecoverVersion(request):
 		intell = float(line[5])
 		DataSet.append([userID, requestID, date, phis, emo, intell])
 		
-	#Тут вызывать построение графика
+	Graph.CreateGraph(DataSet,duration)
 
 def AskBuildNew():
 	result = input("Хотите построить новый прогноз? (Y/N)\n")
