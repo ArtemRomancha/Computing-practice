@@ -68,3 +68,25 @@ def HaveResults(user_id):
 		return True
 	else: 
 		return False
+		
+def GetRequest(user_id):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.execute("SELECT * FROM request WHERE user_id = ?", (user_id, ))
+	row = cursor.fetchall()
+	connector.close()
+	return row
+	
+def GetData(request_id):
+	connector = sql.connect('BioDataBase.db')
+	cursor = connector.cursor()
+	cursor.execute("SELECT * FROM data WHERE request_id = ?", (request_id, ))
+	row = cursor.fetchall()
+	connector.close()
+	return row
+		
+		
+		
+		
+		
+		
