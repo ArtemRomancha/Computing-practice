@@ -1,6 +1,8 @@
 from tkinter import *
 import tkinter.messagebox as tm
 import DBAccess as DB
+import RegistrationWindow as reg
+import BiorhythmsWindow as bio
 
 class LoginFrame(Frame):
 	def __init__(self, master):
@@ -26,30 +28,26 @@ class LoginFrame(Frame):
 		
 		self.pack()
 	def _reg_btn_clickked(self):
-		print("Registration")
-		#Call registration modul
+		reg.Run()
 
 	def _login_btn_clickked(self):
-        #print("Clicked")
 		username = self.userEntry.get()
 		password = self.passEntry.get()
 
-        #print(username, password)
-
 		if DB.Control(username, password):
-			tm.showinfo("Login info", "Welcome, %s" % username)
+			tm.showinfo("Login success", "Welcome, %s" % username)
+			self.master.destroy()
+			bio.Run(DB.GetDateOfBirth(username))
 		else:
-			tm.showerror("Login error", "Incorrect username or password")
-			#self.master.destroy()			
+			tm.showerror("Login error", "Incorrect username or password")					
 
 def set_center(root):
 	root.withdraw()
-	root.update_idletasks()  # Update "requested size" from geometry manager
+	root.update_idletasks()
 	x = (root.winfo_screenwidth() - root.winfo_reqwidth()) / 2
 	y = (root.winfo_screenheight() - root.winfo_reqheight()) / 2
 	root.geometry("+%d+%d" % (x, y))
 	root.deiconify()
-
 
 def Run():
 	root = Tk()
@@ -57,5 +55,3 @@ def Run():
 	lf = LoginFrame(root)
 	set_center(root)
 	root.mainloop()
-
-
