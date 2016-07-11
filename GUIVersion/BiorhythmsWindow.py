@@ -28,20 +28,24 @@ class BioFrame(Frame):
 	
 	def _view_btn_clickked(self):		
 		global requests		
-		request = requests[self.ComboBox.current()]		
-		data = DB.GetData(request[0])
-		   
-		DataSet = []
-   
-		for line in data:      
-			userID = int(line[0])
-			requestID = int(line[1])
-			date = line[2]
-			phis = float(line [3])
-			emo = float(line [4])
-			intell = float(line[5])
-			DataSet.append([userID, requestID, date, phis, emo, intell])
-		Graph.CreateGraph(DataSet,int(request[3]))
+		try:
+			request = requests[self.ComboBox.current()]		
+			data = DB.GetData(request[0])
+			   
+			DataSet = []
+	   
+			for line in data:      
+				userID = int(line[0])
+				requestID = int(line[1])
+				date = line[2]
+				phis = float(line [3])
+				emo = float(line [4])
+				intell = float(line[5])
+				DataSet.append([userID, requestID, date, phis, emo, intell])				
+		except:
+			tm.showerror("Graph error", "Не удается построить график")
+			
+		Graph.CreateGraph(DataSet,int(request[3]))			
 
 	def _new_btn_clickked(self):
 		global userData		
